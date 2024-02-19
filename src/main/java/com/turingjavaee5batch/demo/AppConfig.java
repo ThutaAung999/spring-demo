@@ -78,8 +78,15 @@ public class AppConfig implements WebMvcConfigurer {
 	}
 
 	/*
-	 * @Bean public MessageSource messageSource() { var messageSource = new
-	 * ResourceBundleMessageSource(); messageSource.setBasename("messages");
-	 * messageSource.setUseCodeAsDefaultMessage(true); return messageSource; }
-	 */
+	@Bean
+	public MessageSource messageSource() {
+	    ReloadableResourceBundleMessageSource messageSource
+	      = new ReloadableResourceBundleMessageSource();
+	    
+	    messageSource.setBasename("classpath:messages");
+	    messageSource.setDefaultEncoding("UTF-8");
+	    return messageSource;
+	}
+	*/
+	
 }
