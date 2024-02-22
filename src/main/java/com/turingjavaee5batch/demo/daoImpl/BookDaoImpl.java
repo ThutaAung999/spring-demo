@@ -1,4 +1,4 @@
-package com.turingjavaee5batch.demo.datImpl;
+package com.turingjavaee5batch.demo.daoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +34,22 @@ public class BookDaoImpl implements BookDao {
 	@Override
 	public void save(Book book) {
 		this.books.add(book);
+	}
+
+	@Override
+	public void update(Book book) {
+	
+		Book  originalBook=this.getBookById(book.getId());
+			originalBook.setAuthor(book.getAuthor());
+			originalBook.setTitle(book.getTitle());		
+	}
+
+	@Override
+	public void deleteBookByID(String id) {
+		List<Book> books= this.books.stream()
+						.filter(book ->! book.getId().equals(id))
+						.collect(Collectors.toList());
+		
+		this.books=books;
 	}
 }

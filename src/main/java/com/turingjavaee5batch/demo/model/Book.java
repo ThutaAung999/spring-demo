@@ -15,7 +15,7 @@ public class Book {
 	String id;
 	 
 	 @NotBlank(message = "{required.book.title}")
-	 @Size(min = 3, max = 100, message = "Title must be between 3 and 100 characters")
+	 @Size(min = 3, max = 100, message = "{size.book.title}")
 	String title;
 	 
 	 @NotBlank(message = "{required.book.author}")

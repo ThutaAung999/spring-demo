@@ -31,4 +31,14 @@ public class BookServiceImpl implements BookService {
 		this.bookDao.save(book);
 	}
 
+	@Override
+	public void update(Book book) {
+		this.bookDao.update(book);		
+	}
+
+	@Override
+	public void deleteBookById(String id) {
+		this.bookDao.deleteBookByID(id);		
+	}
+
 }
