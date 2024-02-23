@@ -10,9 +10,9 @@ public interface BookService {
 
 	Book getBookById(String id);
 
-	void save(Book book);
+	Book save(Book book);
 	
-	void update(Book book);
+	Book update(Book book);
 	
 	void deleteBookById(String id);
 }

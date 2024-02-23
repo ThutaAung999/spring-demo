@@ -32,16 +32,20 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void save(Book book) {
-		this.books.add(book);
+	public Book save(Book book) {
+		 this.books.add(book);
+		 
+		 return book;
 	}
 
 	@Override
-	public void update(Book book) {
+	public Book update(Book book) {
 	
 		Book  originalBook=this.getBookById(book.getId());
 			originalBook.setAuthor(book.getAuthor());
-			originalBook.setTitle(book.getTitle());		
+			originalBook.setTitle(book.getTitle());
+			
+			return originalBook;
 	}
 
 	@Override

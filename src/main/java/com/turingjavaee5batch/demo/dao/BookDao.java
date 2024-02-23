@@ -10,7 +10,7 @@ public interface BookDao {
 
 	Book getBookById(String id);
 
-	void save(Book book);
-	void update(Book book);
+	Book save(Book book);
+	Book update(Book book);
 	void deleteBookByID (String id);
 }
