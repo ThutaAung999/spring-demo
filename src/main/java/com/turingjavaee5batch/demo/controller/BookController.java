@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.turingjavaee5batch.demo.aop.Log;
 import com.turingjavaee5batch.demo.model.Book;
 import com.turingjavaee5batch.demo.services.BookService;
+import com.turingjavaee5batch.demo.services.exception.BusinessLogicException;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -50,11 +52,12 @@ public class BookController {
 		model.addAttribute("category", category);
 	}
 
+	@Log
 	@GetMapping
 	String getAllBook(Model model) {
 		List<Book> books = this.bookService.getAllBooks();
 		for (Book book : books) {
-			log.info("Book " + book);
+			log.info("Book  : " + book);
 		}
 		model.addAttribute("books", books);
 		return "/books/book";
@@ -123,15 +126,16 @@ public class BookController {
 	String deleteBook(Model model,@PathVariable String id)
 	{
 		log.info("Delete book" +id);
-		this.bookService.deleteBookById(id);
-		
-		/*
-		 * try { this.bookService.deleteBookById(id); } catch (BusinesLogicException e)
-		 * { e.printStackTrace(); }
-		 */
+		try {
+			this.bookService.deleteBookById(id);
+		} catch (BusinessLogicException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "redirect:/books";
 	}
+	
 
 	@GetMapping("/cart")
 	String cartForm(Model model) {

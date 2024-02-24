@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.turingjavaee5batch.demo.controller.rest.error.ApiError;
 import com.turingjavaee5batch.demo.model.Book;
 import com.turingjavaee5batch.demo.services.BookService;
+import com.turingjavaee5batch.demo.services.exception.BusinessLogicException;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -66,5 +69,39 @@ public class BookApiController {
 		}
 		
 	}
+	
+	
+
+	@PutMapping("/{bookId}")
+	ResponseEntity<Object> updateBook(@PathVariable String bookId,@RequestBody  @Valid Book  book,BindingResult result) {
+		log.info("PUT updateBook id "+ bookId+"   "+book);
+		
+		if(result.hasErrors()) {
+			log.info("Validation error in  creation book : "+result);
+			return ResponseEntity.badRequest().body(result.getAllErrors());
+		}
+		else
+		{
+		return ResponseEntity.status(HttpStatus.CREATED).body( this.bookService.update(book));
+		}
+		
+	}
+	
+	@DeleteMapping("/{bookId}")
+	ResponseEntity<Object> deleteBook(@PathVariable String bookId){
+		log.info("Delete book id:"+bookId);
+		Book  deleteBook;
+		
+		try {
+			deleteBook=this.bookService.deleteBookById(bookId);
+			return ResponseEntity.ok().body(deleteBook);
+		} catch (BusinessLogicException e) {
+			return ResponseEntity.badRequest().body(e);
+		}
+		
+		
+	}
+	
+	
 }
   

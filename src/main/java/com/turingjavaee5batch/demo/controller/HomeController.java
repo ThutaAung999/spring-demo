@@ -72,6 +72,14 @@ public class HomeController {
 
 		return "home";
 	}
+	
+	
+	@GetMapping("/throw")
+	String throwException() throws Exception {
+
+		throw new Exception("Just Throw");
+	
+	}
 
 	@GetMapping("/prototype")
 	public String prototypeScopeTest() {

@@ -22,7 +22,7 @@ public class LoginController {
 
 	@GetMapping
 	public String login() {
-		log.info("Loing GET handler");
+		log.info("Login GET handler");
 		return "login";
 	}
 

@@ -12,5 +12,5 @@ public interface BookDao {
 
 	Book save(Book book);
 	Book update(Book book);
-	void deleteBookByID (String id);
+	Book  deleteBookByID (String id);
 }

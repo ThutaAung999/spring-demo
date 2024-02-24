@@ -3,6 +3,7 @@ package com.turingjavaee5batch.demo.services;
 import java.util.List;
 
 import com.turingjavaee5batch.demo.model.Book;
+import com.turingjavaee5batch.demo.services.exception.BusinessLogicException;
 
 public interface BookService {
 
@@ -14,5 +15,5 @@ public interface BookService {
 	
 	Book update(Book book);
 	
-	void deleteBookById(String id);
+	Book deleteBookById(String id) throws BusinessLogicException;
 }
