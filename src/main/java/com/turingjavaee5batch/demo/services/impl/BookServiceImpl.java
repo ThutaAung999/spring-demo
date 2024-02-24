@@ -10,6 +10,9 @@ import com.turingjavaee5batch.demo.model.Book;
 import com.turingjavaee5batch.demo.services.BookService;
 import com.turingjavaee5batch.demo.services.exception.BusinessLogicException;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -18,6 +21,8 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> getAllBooks() {
+		log.info("getAllBook   API  service layer");
+		
 		return this.bookDao.getAllBooks();
 	}
 
