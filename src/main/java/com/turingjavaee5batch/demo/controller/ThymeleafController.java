@@ -19,7 +19,8 @@ public class ThymeleafController {
 	String index(Model model)
 	{
 		log.info("thmymeleaf index");
-		model.addAttribute("message","Message from controller");
+		
+		model.addAttribute("message","message from ThymeleafController");
 		
 		List<String> cities = new ArrayList<String>();
 		cities.add("Yangon");
@@ -28,9 +29,11 @@ public class ThymeleafController {
 		cities.add("Bagan");
 		
 		model.addAttribute("cities", cities);
+		
 		model.addAttribute("gender", "m");
 		return "view";
 	}
+	
 	@RequestMapping("/conditional")
 	String conditional(Model model)
 	{
@@ -47,4 +50,5 @@ public class ThymeleafController {
 		model.addAttribute("gender", "m");
 		return "conditional";
 	}
+
 }

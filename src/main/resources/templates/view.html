@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org">
+
+
+
+<body>
+	
+	<header th:insert="fragments/header.html"> </header>
+
+	<h1>View Index</h1>
+
+	Message from message.properties       : <span th:text="#{'view.greeting'}"></span>
+	<br><br>
+	Message form Controller     : <span th:text="${message}+' : Hello world'"></span>
+	<br><br>
+	 <span th:text="|The message is : ${message}|"></span>
+	<br><br>
+	
+	Message UpperCase     : <span th:tex
+t="${message.toUpperCase()}"></span>
+
+	<ol>
+    	<li th:each="city : ${cities}">
+    		<span th:text="${city}"/>
+    	</li>
+    </ol>
+    
+    <br><br>
+    
+    <h3>Conditional</h3>
+    
+    	<p th:text="${ gender} eq 'm' ? 'Male':'Female'"></p>
+    	    <span th:if="${gender == 'F'}">Female</span>
+    	<span th:unless="${gender == 'F'}">Male</span>
+
+    
+    
+    <footer th:insert="fragments/footer.html"> </footer>
+</body>
+
+</html>
