@@ -9,11 +9,11 @@ public interface BookService {
 
 	List<Book> getAllBooks();
 
-	Book getBookById(String id);
+	Book getBookById(Long id);
 
 	Book save(Book book);
 	
 	Book update(Book book);
 	
-	Book deleteBookById(String id) throws BusinessLogicException;
+	Book deleteBookById(Long id) throws BusinessLogicException;
 }

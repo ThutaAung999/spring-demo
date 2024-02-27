@@ -32,12 +32,12 @@ public class MvcController {
 	@GetMapping("books/api/1")
 	@ResponseBody
 	Book getBook() {
-		return new Book("id_1", "Title_1", "Auther_1");
+		return new Book(1L, "Title_1", "Auther_1");
 	}
 
 	@GetMapping("books/api/2")
 	ResponseEntity<Book> getBook2() {
-		return ResponseEntity.ok(new Book("id_2", "Title_2", "Auther_2"));
+		return ResponseEntity.ok(new Book(2L, "Title_2", "Auther_2"));
 	}
 
 	@GetMapping("/books/request")

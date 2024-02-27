@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.turingjavaee5batch.demo.controller.rest.error.ApiError;
+import com.turingjavaee5batch.demo.controller.rest.error.ApiErrorResponse;
 import com.turingjavaee5batch.demo.model.Book;
 import com.turingjavaee5batch.demo.services.BookService;
 import com.turingjavaee5batch.demo.services.exception.BusinessLogicException;
@@ -41,7 +41,7 @@ public class BookApiController {
 
 	
 	@GetMapping("/{bookId}")
-	ResponseEntity<Object> getBookById(@PathVariable String bookId){
+	ResponseEntity<Object> getBookById(@PathVariable Long bookId){
 		log.info("GET  /api/books/"+bookId);
 		
 		Book book=null;
@@ -50,7 +50,7 @@ public class BookApiController {
 				return ResponseEntity.ok(book);
 		} catch (Exception e) {
 				log.error("getBookById eror"+e.getMessage());
-				ApiError error=new ApiError("1001", "No such  book with bookId :"+bookId);
+				ApiErrorResponse error=new ApiErrorResponse("1001", "No such  book with bookId :"+bookId);
 				return  ResponseEntity.badRequest().body(error);
 		}		
 	}
@@ -73,7 +73,7 @@ public class BookApiController {
 	
 
 	@PutMapping("/{bookId}")
-	ResponseEntity<Object> updateBook(@PathVariable String bookId,@RequestBody  @Valid Book  book,BindingResult result) {
+	ResponseEntity<Object> updateBook(@PathVariable Long bookId,@RequestBody  @Valid Book  book,BindingResult result) {
 		log.info("PUT updateBook id "+ bookId+"   "+book);
 		
 		if(result.hasErrors()) {
@@ -88,7 +88,7 @@ public class BookApiController {
 	}
 	
 	@DeleteMapping("/{bookId}")
-	ResponseEntity<Object> deleteBook(@PathVariable String bookId){
+	ResponseEntity<Object> deleteBook(@PathVariable Long bookId){
 		log.info("Delete book id:"+bookId);
 		Book  deleteBook;
 		

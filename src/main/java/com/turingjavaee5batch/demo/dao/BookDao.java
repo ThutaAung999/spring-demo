@@ -8,9 +8,9 @@ public interface BookDao {
 
 	List<Book> getAllBooks();
 
-	Book getBookById(String id);
+	Book getBookById(Long id);
 
 	Book save(Book book);
 	Book update(Book book);
-	Book  deleteBookByID (String id);
+	Book  deleteBookByID (Long id);
 }
