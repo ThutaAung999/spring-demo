@@ -2,6 +2,7 @@ package com.turingjavaee5batch.demo.services.impl;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	PostDao postDao;
 
-	//ModelMapper modelMapper = new ModelMapper();
+	ModelMapper modelMapper = new ModelMapper();
 	
 	@Override
 	public Iterable<Post> getAllPost() {
@@ -26,17 +27,10 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostDto savePost(PostDto postDto) {
 	
-		Post post=new Post();
-		post.setTitle(postDto.getTitle());
-		post.setContent(postDto.getContent());
-		
+		Post post=modelMapper.map(postDto,Post.class);				
 		post=this.postDao.save(post);
 		
-		PostDto savedDto= new PostDto();
-		
-		savedDto.setId(post.getId());
-		savedDto.setTitle(post.getTitle());
-		savedDto.setContent(post.getContent());
+		PostDto savedDto= this.modelMapper.map(post, PostDto.class);		
 		
 		return savedDto;
 	}
@@ -45,18 +39,10 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostDto updatePost(PostDto postDto) {
 
-		Post post=new Post();
-		post.setId(postDto.getId());
-		post.setTitle(postDto.getTitle());
-		post.setContent(postDto.getContent());
-		
+		Post post=modelMapper.map(postDto,Post.class);				
 		post=this.postDao.save(post);
 		
-		PostDto savedDto= new PostDto();
-		
-		savedDto.setId(post.getId());
-		savedDto.setTitle(post.getTitle());
-		savedDto.setContent(post.getContent());
+		PostDto savedDto= this.modelMapper.map(post, PostDto.class);		
 		
 		return savedDto;
 	}
@@ -70,12 +56,8 @@ public class PostServiceImpl implements PostService {
 		if(result.isPresent())
 		{
 			Post post = result.get();
-				
-			PostDto postDto=new PostDto();
-			postDto.setId(post.getId());
-			postDto.setTitle(post.getTitle());
-			postDto.setContent(post.getContent());
-			
+						
+			PostDto postDto= this.modelMapper.map(post, PostDto.class);
 			
 			return Optional.of(postDto);
 		}
